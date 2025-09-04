@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { publicUserDetails, resetPublicUserDetails, PUBalanceQuota ,resetviewplanActive} from '../../Features/Slices/PublicUser/publicUserSlice';
+import { publicUserDetails, resetPublicUserDetails, PUBalanceQuota ,resetviewplanActive,resetBalanceQuota} from '../../Features/Slices/PublicUser/publicUserSlice';
 // import sampleBroker from '../../img/1735228367286sampleBroker2.png'
 // import contactUs from '../../img/broker_svg_contact.svg';
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -22,11 +22,14 @@ export function PublicUserHome() {
       balanceQuotaDetails, planCategory, expiryDate,userStatus,planId ,isBalanceQuotaLoading,isBalanceQuotaSuccess} = useSelector((state) => state.public)
 
    useEffect(() => {
-      if (isPublicUserDetailLoading == false && isPublicUserDetailSuccess == false) {
+      if (isPublicUserDetailLoading === false && isPublicUserDetailSuccess === false) {
          dispatch(publicUserDetails())
       }
-      if(isBalanceQuotaLoading == false && isBalanceQuotaSuccess == false){
+      if(isBalanceQuotaLoading === false && isBalanceQuotaSuccess === false){
          dispatch(PUBalanceQuota({ profileId: userId }))
+      }
+      if(isBalanceQuotaSuccess === true){
+         dispatch(resetBalanceQuota())
       }
 
       // if(isBalanceQuotaSuccess)
@@ -35,7 +38,7 @@ export function PublicUserHome() {
       // }
       
 
-   }, [publicuserDetails, isPublicUserDetailLoading, isPublicUserDetailSuccess], dispatch)
+   }, [publicuserDetails, isPublicUserDetailLoading, isPublicUserDetailSuccess,isBalanceQuotaLoading,isBalanceQuotaSuccess], dispatch)
 
    const [formData, setFormData] = useState({
       name: '',

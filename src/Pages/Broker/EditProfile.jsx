@@ -363,14 +363,14 @@ export function EditProfile() {
     dispatch(removeProfileImage(data));
   }
 
-  const onsetProfile = (image) => {
+  const onsetProfile = (image, index) => {
     let updatedImage = []
     Images.map((img) => {
-      if (img == image) {
-        updatedImage.push({ name: getImageNameFromPath(img), isProfile: true })
+      if (img == index) {
+        updatedImage.push({ imageName: index, isProfile: true })
       }
       else {
-        updatedImage.push({ name: getImageNameFromPath(img), isProfile: false })
+        updatedImage.push({ imageName: index, isProfile: false })
       }
     });
     const data = { "profileId": profileId, "images": updatedImage }
@@ -378,11 +378,11 @@ export function EditProfile() {
     dispatch(setProfilePicture(data))
   }
 
-  const getImageNameFromPath = (imagePath) => {
-    const imageNameWithQuery = imagePath.split('/').pop();
-    const imageName = imageNameWithQuery.split('?')[0];
-    return imageName;
-  };
+  // const getImageNameFromPath = (imagePath) => {
+  //   const imageNameWithQuery = imagePath.split('/').pop();
+  //   const imageName = imageNameWithQuery.split('?')[0];
+  //   return imageName;
+  // };
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -438,7 +438,7 @@ export function EditProfile() {
     const uploadedFile = e.target.files[0];
     const newName = `${Date.now()}`;
     const fileExtension = uploadedFile.name.split('.').pop();
-    const modifiedFile = new File([uploadedFile], newName + fileExtension, { type: uploadedFile.type });
+    const modifiedFile = new File([uploadedFile], newName + "." + fileExtension, { type: uploadedFile.type });
     setFileUrl(URL.createObjectURL(modifiedFile));
     formData.append("file", modifiedFile)
     formData.append("profileId", profileId)
@@ -1106,7 +1106,7 @@ export function EditProfile() {
                   </div>
                   <div className="row mb-2">
                     <div className="col-6 d-flex justify-content-center"><button type="button" onClick={() => onProfileImageDelete(image, index)} className="secondarybutton">Delete Image</button></div>
-                    <div className="col-6 d-flex justify-content-center"><button type="button" onClick={() => onsetProfile(image)} className="secondarybutton me-3" style={{ width: 200 }}>Set as profile Image</button></div>
+                    <div className="col-6 d-flex justify-content-center"><button type="button" onClick={() => onsetProfile(image, index)} className="secondarybutton me-3" style={{ width: 200 }}>Set as profile Image</button></div>
                   </div>
                 </div>
               ))
