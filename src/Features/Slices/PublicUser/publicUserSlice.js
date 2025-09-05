@@ -977,7 +977,8 @@ export const publicUserSlice = createSlice({
             .addCase(getPublicUserPlans.fulfilled, (state, action) => {
                 state.isGetPUPlanLoading = false
                 state.isGetPUPlanSuccess = true
-                state.isPUPlanList = action.payload
+                state.isPUPlanList = action.payload.publicUserPlan
+                state.planIDs = action.payload.planIDs
             })
             .addCase(getPublicUserPlans.rejected, (state, action) => {
                 state.isGetPUPlanSuccess = false

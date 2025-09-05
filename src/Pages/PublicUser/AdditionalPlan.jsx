@@ -20,7 +20,23 @@ export function AdditionalPlan() {
     const [amount, setAmount] = useState('1');
     // alert(profileId)
 
-          const  handlePay = () => {
+const { isGetPUPlanLoading, isGetPUPlanSuccess, isPUPlanList, isGetPUPlanError, isUpgradePlanLoading, isUpgradePlanSuccess, isUpgradePlanError,
+        isUpgradePlanMessage,isAdditionalPlanLoading,isAdditionalPlanSuccess,getAdditionalPlan,isAdditionalPlanError, AdditionalPlanMessage,planIDs } = useSelector((state) => state.public)
+
+
+        const  handlePay = (clickedPlanID) => {
+
+           const isActive = planIDs?.some(id => {
+        if (!id || !clickedPlanID) return false;
+                return id.toString() === clickedPlanID.toString();
+           });
+
+            if (isActive) {
+               console.log("Matched Plan ID Found");
+                 return toast.error( 'This plan already exists for this profile.');
+             }
+
+        
          if (!amount || isNaN(amount)) {
               alert("Enter a valid amount");
               return;
@@ -50,9 +66,6 @@ export function AdditionalPlan() {
                  }
                );
       }
-
-        const { isGetPUPlanLoading, isGetPUPlanSuccess, isPUPlanList, isGetPUPlanError, isUpgradePlanLoading, isUpgradePlanSuccess, isUpgradePlanError,
-        isUpgradePlanMessage,isAdditionalPlanLoading,isAdditionalPlanSuccess,getAdditionalPlan,isAdditionalPlanError, AdditionalPlanMessage } = useSelector((state) => state.public)
 
         useEffect(() => {
         if (!isGetPUPlanLoading && !isGetPUPlanSuccess) {
@@ -247,7 +260,7 @@ export function AdditionalPlan() {
                                     </p>
                                     <hr />
                                     <div className="float-end">
-                                        <button className="btn btn-success" type="submit" onClick={() => planUpgrade(planList._id)}>
+                                        <button className="btn btn-success" type="submit" onClick={() => {planUpgrade(planList._id);handlePay(planList._id)}}>
                                             Upgrade
                                         </button>
                                     </div>

@@ -23,8 +23,21 @@ export function PUPlanSchedule() {
     const [amount, setAmount] = useState('1');
     const [showModal, setShowModal] = useState(false)
 
+const { isGetPUPlanLoading, isGetPUPlanSuccess, isPUPlanList, isGetPUPlanError, isUpgradePlanLoading, isUpgradePlanSuccess, isUpgradePlanError,
+        isUpgradePlanMessage,planIDs } = useSelector((state) => state.public)
 
-      const  handlePay = () => {
+
+      const  handlePay = (clickedPlanID) => {
+
+          const isActive = planIDs?.some(id => {
+        if (!id || !clickedPlanID) return false;
+                return id.toString() === clickedPlanID.toString();
+           });
+
+            if (isActive) {
+               console.log("Matched Plan ID Found");
+                 return toast.error( 'This plan already exists for this profile.');
+             }
          if (!amount || isNaN(amount)) {
               alert("Enter a valid amount");
               return;
@@ -55,8 +68,6 @@ export function PUPlanSchedule() {
                );
       }
 
-    const { isGetPUPlanLoading, isGetPUPlanSuccess, isPUPlanList, isGetPUPlanError, isUpgradePlanLoading, isUpgradePlanSuccess, isUpgradePlanError,
-        isUpgradePlanMessage } = useSelector((state) => state.public)
 
     useEffect(() => {
         /**Get all public user Plan */
@@ -259,7 +270,7 @@ export function PUPlanSchedule() {
                                     </p>
                                     <hr />
                                     <div className="float-end">
-                                        <button className="btn btn-success" type="submit" onClick={() => planUpgrade(planList._id)}>
+                                        <button className="btn btn-success" type="submit" onClick={() => {planUpgrade(planList._id);handlePay(planList._id)}}>
                                             Upgrade
                                         </button>
                                     </div>

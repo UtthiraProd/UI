@@ -146,4 +146,50 @@ margin-top: 20%;
   color: #1aa179;               /* Change text color on hover (example: white) */
 }
 
+/* Default (desktop/laptop) - left-aligned */
+.non-blocking-modal .modal-dialog {
+  margin-left: 20%;      /* left align */
+  margin-right: auto;
+  max-width: 550px;
+  height: 650px;
+}
 
+/* Medium screens (tablet/laptop) */
+@media (max-width: 1024px) {
+  .non-blocking-modal .modal-dialog {
+    margin-left: 10px;   /* slightly left */
+    margin-right: auto;
+    width: 400px;
+  }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 768px) {
+  .non-blocking-modal .modal-dialog {
+    margin: 0 auto;     /* center horizontally */
+    width: 100%;         /* almost full width */
+    height: auto;       /* adjust height automatically */
+  }
+}
+
+.responsive-image {
+  width: 650px;         /* fixed width for laptop/desktop */
+  height: 80vh;         /* 90% of viewport height */
+  object-fit: contain;   /* maintain aspect ratio */
+  display: block;
+  margin-left:60px;       /* center horizontally */
+}
+
+@media (max-width: 1024px) {
+  .responsive-image {
+    width: 90%;         /* smaller width on tablets/laptops */
+    height: 70vh;       /* adjust height proportionally */
+  }
+}
+
+@media (max-width: 768px) {
+  .responsive-image {
+    width: 80%;         /* scale down on mobile */
+    height: auto;       /* height adjusts automatically */
+}
+}
