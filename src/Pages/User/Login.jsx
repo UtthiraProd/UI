@@ -11,7 +11,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import {setFilterBrokList} from "../../Features/Slices/PublicUser/publicUserSlice"
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/esm/Button";
-import internship from "../../img/internship.png"
+import internship from "../../img/internship.jpg"
 
 export function Login() {
     const navigate = useNavigate();
@@ -211,38 +211,38 @@ export function Login() {
 
             <Modal show={show} className="non-blocking-modal" keyboard={false} style={{ pointerEvents: "none" }}>
   <Modal.Header>
-    <h5 style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 'bold',}}>Explore Our Additional Internship Services for Engineering Students.!</h5>
-    {/* Override close button color inline */}
+    <h5 style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 'bold' }}>
+      Explore Our Additional Internship Services for Engineering Students.!
+    </h5>
     
- <button
-  type="button"
-  onClick={onHandleClose}
-  aria-label="Close"
-  style={{
-    background: 'none',
-    border: 'none',
-    fontSize: '2.5rem',
-    fontWeight: 'bold',
-    color: 'red',
-    cursor: 'pointer',
-    padding: 0,
-    lineHeight: 0,
-  }}
->
-  ×
-</button>
-
-
+    <button
+      type="button"
+      onClick={onHandleClose}
+      aria-label="Close"
+      style={{
+        background: 'none',
+        border: 'none',
+        fontSize: '2.5rem',
+        fontWeight: 'bold',
+        color: 'red',
+        cursor: 'pointer',
+        padding: 0,
+        lineHeight: 0,
+      }}
+    >
+      ×
+    </button>
   </Modal.Header>
 
   <Modal.Body style={{ pointerEvents: "auto" }}>
-    <p style={{marginLeft:"70%"}} className="btn btn-outline-success" onClick={onHandleClose}>Continue to Login</p>
-    <p className="responsive-image">
-      <img src={internship} alt="Example"/>
+    <p className="btn btn-outline-success continue-btn" onClick={onHandleClose}>
+      Continue to Login
     </p>
+    <div className="responsive-image">
+      <img src={internship} alt="Internship Poster" />
+    </div>
   </Modal.Body>
 </Modal>
-
         </>
     );
 }

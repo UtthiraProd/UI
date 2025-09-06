@@ -148,48 +148,52 @@ margin-top: 20%;
 
 /* Default (desktop/laptop) - left-aligned */
 .non-blocking-modal .modal-dialog {
-  margin-left: 20%;      /* left align */
+  margin-left: 20%;   /* left align */
   margin-right: auto;
   max-width: 550px;
-  height: 650px;
+  height: auto;
 }
 
 /* Medium screens (tablet/laptop) */
 @media (max-width: 1024px) {
   .non-blocking-modal .modal-dialog {
-    margin-left: 10px;   /* slightly left */
-    margin-right: auto;
-    width: 400px;
+    margin: 0 auto;    /* center horizontally */
+    width: 90%;        /* responsive */
+    max-width: 500px;
   }
 }
 
 /* Small screens (mobile) */
 @media (max-width: 768px) {
   .non-blocking-modal .modal-dialog {
-    margin: 0 auto;     /* center horizontally */
-    width: 100%;         /* almost full width */
-    height: auto;       /* adjust height automatically */
+    margin: 0 auto;    /* center horizontally */
+    width: 95%;        /* almost full width */
+    height: auto;      /* auto height */
   }
 }
 
-.responsive-image {
-  width: 650px;         /* fixed width for laptop/desktop */
-  height: 80vh;         /* 90% of viewport height */
-  object-fit: contain;   /* maintain aspect ratio */
+.responsive-image img {
+  width: 100%;        /* always scale inside container */
+  height: auto;       /* keep aspect ratio */
+  object-fit: contain;
   display: block;
-  margin-left:60px;       /* center horizontally */
+  margin: 0 auto;     /* center image */
 }
 
-@media (max-width: 1024px) {
-  .responsive-image {
-    width: 90%;         /* smaller width on tablets/laptops */
-    height: 70vh;       /* adjust height proportionally */
-  }
+.continue-btn {
+  display: inline-block;
+  font-size: 1rem;
+  padding: 8px 16px;
+  margin-left: 65%;   /* desktop position */
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
-  .responsive-image {
-    width: 80%;         /* scale down on mobile */
-    height: auto;       /* height adjusts automatically */
-}
+  .continue-btn {
+    display: inline-block;
+    margin-left: 65%;
+    font-size: 11px;    /* make it slightly bigger */
+    padding: 10px;        /* bigger tap area */
+    text-align: center;
+  }
 }
