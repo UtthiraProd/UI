@@ -24,18 +24,7 @@ const { isGetPUPlanLoading, isGetPUPlanSuccess, isPUPlanList, isGetPUPlanError, 
         isUpgradePlanMessage,isAdditionalPlanLoading,isAdditionalPlanSuccess,getAdditionalPlan,isAdditionalPlanError, AdditionalPlanMessage,planIDs } = useSelector((state) => state.public)
 
 
-        const  handlePay = (clickedPlanID) => {
-
-           const isActive = planIDs?.some(id => {
-        if (!id || !clickedPlanID) return false;
-                return id.toString() === clickedPlanID.toString();
-           });
-
-            if (isActive) {
-               console.log("Matched Plan ID Found");
-                toast.error( 'This plan already exists for this profile.');
-                 return 
-             }
+        const  handlePay = () => {
 
         
          if (!amount || isNaN(amount)) {
@@ -128,6 +117,17 @@ const { isGetPUPlanLoading, isGetPUPlanSuccess, isPUPlanList, isGetPUPlanError, 
            if (clickedPlanID !== planID) {
                 return toast.error("Please click the Upgrade button on the selected plan.");
             }
+
+         const isActive = planIDs?.some(id => {
+        if (!id || !clickedPlanID) return false;
+                return id.toString() === clickedPlanID.toString();
+           });
+
+            if (isActive) {
+               console.log("Matched Plan ID Found");
+               return toast.error( 'This plan already exists for this profile.');
+                  
+             }
     
             let hasRequiredfieldValidation = false
             let hasOtherfieldValidation = false
@@ -261,7 +261,7 @@ const { isGetPUPlanLoading, isGetPUPlanSuccess, isPUPlanList, isGetPUPlanError, 
                                     </p>
                                     <hr />
                                     <div className="float-end">
-                                        <button className="btn btn-success" type="submit" onClick={() => {planUpgrade(planList._id);handlePay(planList._id)}}>
+                                        <button className="btn btn-success" type="submit" onClick={() => {planUpgrade(planList._id)}}>
                                             Upgrade
                                         </button>
                                     </div>
