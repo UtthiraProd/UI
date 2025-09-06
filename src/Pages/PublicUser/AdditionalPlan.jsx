@@ -33,7 +33,8 @@ const { isGetPUPlanLoading, isGetPUPlanSuccess, isPUPlanList, isGetPUPlanError, 
 
             if (isActive) {
                console.log("Matched Plan ID Found");
-                 return toast.error( 'This plan already exists for this profile.');
+                toast.error( 'This plan already exists for this profile.');
+                 return 
              }
 
         
